@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="splash_background">#FFF8F5</color>
+
+    <style name="Theme.LuminaWalls" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <!-- TODO: [Session 1] Pasang dependency core-splashscreen di build.gradle.kts, lalu aktifkan style Theme.App.Starting di bawah ini & ganti android:theme di AndroidManifest.xml:
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/gdg_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.LuminaWalls</item>
+    </style>
+    -->
+</resources>
