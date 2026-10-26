@@ -51,10 +51,10 @@ fun RichSelectionCard(
         if (selected) MaterialTheme.colorScheme.onSecondaryContainer
         else MaterialTheme.colorScheme.onSurface
     val iconContainerColor =
-        if (selected) MaterialTheme.colorScheme.primary
+        if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.18f)
         else MaterialTheme.colorScheme.surfaceContainerHighest
     val iconTint =
-        if (selected) MaterialTheme.colorScheme.onPrimary
+        if (selected) MaterialTheme.colorScheme.primary
         else MaterialTheme.colorScheme.onSurfaceVariant
 
     Surface(

@@ -17,9 +17,11 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -94,7 +96,11 @@ fun LuminaMainApp() {
                 }
             }
 
-            Box(modifier = Modifier.fillMaxSize()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.surfaceContainerLow),
+            ) {
                 AnimatedContent(
                     targetState = activeScreen,
                     transitionSpec = {
@@ -102,79 +108,35 @@ fun LuminaMainApp() {
                         val isReturningFromSubScreen = initialState is AppScreen.Preview || initialState is AppScreen.Settings
 
                         if (isOpeningSubScreen && !isReturningFromSubScreen) {
-                            // Forward Depth Transition (Auriya style: slide in with spring + scale out background)
+                            // Forward Deep Navigation (Standard M3 Slide + Fade)
                             (
                                 slideInHorizontally(
-                                    initialOffsetX = { it },
-                                    animationSpec = spring(
-                                        stiffness = Spring.StiffnessMediumLow,
-                                        dampingRatio = Spring.DampingRatioNoBouncy,
-                                    ),
-                                ) + fadeIn(animationSpec = tween(220))
-                            ).togetherWith(
-                                scaleOut(targetScale = 0.94f, animationSpec = tween(180, easing = EaseInCubic)) +
-                                    fadeOut(animationSpec = tween(180))
-                            )
-                        } else if (isReturningFromSubScreen && !isOpeningSubScreen) {
-                            // Pop Depth Transition (Auriya style: slide out to right + scale in background)
-                            (
-                                scaleIn(initialScale = 0.94f, animationSpec = tween(220, easing = EaseOutCubic)) +
-                                    fadeIn(animationSpec = tween(200))
+                                    initialOffsetX = { fullWidth -> fullWidth },
+                                    animationSpec = tween(300, easing = EaseOutCubic),
+                                ) + fadeIn(animationSpec = tween(220, easing = EaseOutCubic))
                             ).togetherWith(
                                 slideOutHorizontally(
-                                    targetOffsetX = { it },
-                                    animationSpec = spring(
-                                        stiffness = Spring.StiffnessMediumLow,
-                                        dampingRatio = Spring.DampingRatioNoBouncy,
-                                    ),
+                                    targetOffsetX = { fullWidth -> -(fullWidth * 0.2f).toInt() },
+                                    animationSpec = tween(300, easing = EaseOutCubic),
                                 ) + fadeOut(animationSpec = tween(180, easing = EaseInCubic))
                             )
-                        } else if (initialState is AppScreen.MainTab && targetState is AppScreen.MainTab) {
-                            // Tab Shared Axis Transition (Auriya style: 20% width slide with spring + fade)
-                            val targetIndex = (targetState as AppScreen.MainTab).tab.ordinal
-                            val initialIndex = (initialState as AppScreen.MainTab).tab.ordinal
-                            val isForward = targetIndex > initialIndex
-
-                            if (isForward) {
-                                (
-                                    slideInHorizontally(
-                                        initialOffsetX = { fullWidth -> (fullWidth * 0.2f).toInt() },
-                                        animationSpec = spring(
-                                            stiffness = Spring.StiffnessMediumLow,
-                                            dampingRatio = Spring.DampingRatioNoBouncy,
-                                        ),
-                                    ) + fadeIn(animationSpec = tween(200, easing = EaseOutCubic))
-                                ).togetherWith(
-                                    slideOutHorizontally(
-                                        targetOffsetX = { fullWidth -> -(fullWidth * 0.2f).toInt() },
-                                        animationSpec = spring(
-                                            stiffness = Spring.StiffnessMediumLow,
-                                            dampingRatio = Spring.DampingRatioNoBouncy,
-                                        ),
-                                    ) + fadeOut(animationSpec = tween(160, easing = EaseInCubic))
-                                )
-                            } else {
-                                (
-                                    slideInHorizontally(
-                                        initialOffsetX = { fullWidth -> -(fullWidth * 0.2f).toInt() },
-                                        animationSpec = spring(
-                                            stiffness = Spring.StiffnessMediumLow,
-                                            dampingRatio = Spring.DampingRatioNoBouncy,
-                                        ),
-                                    ) + fadeIn(animationSpec = tween(200, easing = EaseOutCubic))
-                                ).togetherWith(
-                                    slideOutHorizontally(
-                                        targetOffsetX = { fullWidth -> (fullWidth * 0.2f).toInt() },
-                                        animationSpec = spring(
-                                            stiffness = Spring.StiffnessMediumLow,
-                                            dampingRatio = Spring.DampingRatioNoBouncy,
-                                        ),
-                                    ) + fadeOut(animationSpec = tween(160, easing = EaseInCubic))
-                                )
-                            }
+                        } else if (isReturningFromSubScreen && !isOpeningSubScreen) {
+                            // Return from Deep Navigation (Standard M3 Pop Slide + Fade)
+                            (
+                                slideInHorizontally(
+                                    initialOffsetX = { fullWidth -> -(fullWidth * 0.2f).toInt() },
+                                    animationSpec = tween(300, easing = EaseOutCubic),
+                                ) + fadeIn(animationSpec = tween(220, easing = EaseOutCubic))
+                            ).togetherWith(
+                                slideOutHorizontally(
+                                    targetOffsetX = { fullWidth -> fullWidth },
+                                    animationSpec = tween(300, easing = EaseOutCubic),
+                                ) + fadeOut(animationSpec = tween(180, easing = EaseInCubic))
+                            )
                         } else {
-                            // Fallback smooth fade
-                            fadeIn(tween(220)).togetherWith(fadeOut(tween(180)))
+                            // Bottom Nav Tab Switch (Clean M3 Crossfade)
+                            fadeIn(animationSpec = tween(200, easing = EaseOutCubic))
+                                .togetherWith(fadeOut(animationSpec = tween(150, easing = EaseInCubic)))
                         }
                     },
                     modifier = Modifier.fillMaxSize(),
