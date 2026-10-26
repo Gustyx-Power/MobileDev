@@ -184,7 +184,7 @@ fun LuminaListItem(
                     style = MaterialTheme.typography.titleMedium,
                     fontFamily = GoogleSansRounded,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface,
+                    color = titleColor,
                     maxLines = 1,
                     overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
                 )
@@ -193,7 +193,7 @@ fun LuminaListItem(
                         text = subtitle,
                         style = MaterialTheme.typography.bodySmall,
                         fontFamily = GoogleSansRounded,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = subtitleColor,
                         maxLines = 1,
                         overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
                     )
