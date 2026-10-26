@@ -99,11 +99,7 @@ fun ContributorsScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
 
-            // TODO: [Session 3] Init Screen Kosongan: Tampilkan LuminaHeroCard di bawah sini:
-
-
-
-            // TODO: [Session 4] Contributor Cards: Tampilkan GdgocTeamBlock dan ContributorsBlock di bawah sini:
+            // TODO: [Session 4] Buat LuminaHeroCard, GdgocTeamBlock, dan ContributorsBlock di bawah sini:
 
 
 

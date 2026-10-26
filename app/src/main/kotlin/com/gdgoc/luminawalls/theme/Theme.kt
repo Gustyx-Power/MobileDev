@@ -32,6 +32,10 @@ val LuminaLightColorScheme =
         onSurface = LuminaOnSurfaceLight,
         surfaceVariant = LuminaSurfaceVariantLight,
         onSurfaceVariant = LuminaOnSurfaceVariantLight,
+        surfaceContainerLow = LuminaSurfaceContainerLowLight,
+        surfaceContainer = LuminaSurfaceContainerLight,
+        surfaceContainerHigh = LuminaSurfaceContainerHighLight,
+        surfaceContainerHighest = LuminaSurfaceContainerHighestLight,
     )
 
 val LuminaDarkColorScheme =
@@ -54,6 +58,10 @@ val LuminaDarkColorScheme =
         onSurface = LuminaOnSurfaceDark,
         surfaceVariant = LuminaSurfaceVariantDark,
         onSurfaceVariant = LuminaOnSurfaceVariantDark,
+        surfaceContainerLow = LuminaSurfaceContainerLowDark,
+        surfaceContainer = LuminaSurfaceContainerDark,
+        surfaceContainerHigh = LuminaSurfaceContainerHighDark,
+        surfaceContainerHighest = LuminaSurfaceContainerHighestDark,
     )
 
 @Composable

@@ -150,6 +150,9 @@ fun LuminaListItem(
     modifier: Modifier = Modifier,
     shape: androidx.compose.ui.graphics.Shape = RoundedCornerShape(16.dp),
     containerColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.surfaceContainerHigh,
+    border: androidx.compose.foundation.BorderStroke? = null,
+    titleColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurface,
+    subtitleColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurfaceVariant,
     leadingContent: @Composable (() -> Unit)? = null,
     trailingBadgeText: String? = null,
     trailingContent: @Composable (() -> Unit)? = null,
@@ -160,6 +163,7 @@ fun LuminaListItem(
         enabled = onClick != null,
         shape = shape,
         color = containerColor,
+        border = border,
         modifier = modifier.fillMaxWidth(),
     ) {
         Row(
