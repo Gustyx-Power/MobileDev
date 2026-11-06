@@ -51,6 +51,7 @@ fun WallpaperCard(
     ) {
         NetworkImage(
             url = wallpaper.imageUrl,
+            drawableResId = wallpaper.drawableResId,
             contentDescription = wallpaper.title,
             modifier = Modifier.fillMaxSize(),
         )

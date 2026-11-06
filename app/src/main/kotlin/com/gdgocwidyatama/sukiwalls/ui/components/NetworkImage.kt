@@ -2,6 +2,7 @@ package com.gdgocwidyatama.sukiwalls.ui.components
 
 import android.content.Context
 import android.graphics.Bitmap
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -38,12 +39,19 @@ object ImageCacheManager {
 
 @Composable
 fun NetworkImage(
-    url: String?,
-    contentDescription: String?,
+    url: String? = null,
+    @DrawableRes drawableResId: Int = 0,
+    contentDescription: String? = null,
     modifier: Modifier = Modifier,
     contentScale: ContentScale = ContentScale.Crop,
 ) {
-    if (url.isNullOrBlank()) {
+    val model: Any? = when {
+        drawableResId != 0 -> drawableResId
+        !url.isNullOrBlank() -> url
+        else -> null
+    }
+
+    if (model == null) {
         Box(
             modifier = modifier
                 .fillMaxSize()
@@ -54,7 +62,7 @@ fun NetworkImage(
 
     SubcomposeAsyncImage(
         model = ImageRequest.Builder(LocalContext.current)
-            .data(url)
+            .data(model)
             .crossfade(300)
             .build(),
         contentDescription = contentDescription,
