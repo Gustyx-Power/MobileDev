@@ -1,4 +1,4 @@
-package com.gdgoc.luminawalls.ui.components
+package com.gdgocwidyatama.sukiwalls.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -19,17 +19,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.gdgoc.luminawalls.theme.GoogleSansRounded
+import com.gdgocwidyatama.sukiwalls.theme.GoogleSansRounded
 
-/**
- * Global Screen Scaffolding:
- * Standardized background + Top Brand Header + Stacked Sheet Foreground Surface.
- */
 @Composable
-fun LuminaScreenScaffold(
+fun SukiScreenScaffold(
     title: String,
     subtitle: String,
     modifier: Modifier = Modifier,
@@ -42,7 +39,6 @@ fun LuminaScreenScaffold(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.surfaceContainerLow),
     ) {
-        // Top Header
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -73,7 +69,6 @@ fun LuminaScreenScaffold(
             }
         }
 
-        // Foreground Stacked Rounded Sheet
         Surface(
             shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
             color = MaterialTheme.colorScheme.surface,
@@ -90,138 +85,48 @@ fun LuminaScreenScaffold(
     }
 }
 
-/**
- * Reusable Section Title & Subtitle.
- */
 @Composable
-fun SectionHeader(
+fun SukiListItem(
     title: String,
     subtitle: String,
     modifier: Modifier = Modifier,
-) {
-    Column(modifier = modifier.padding(vertical = 4.dp)) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.titleLarge,
-            fontFamily = GoogleSansRounded,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface,
-        )
-        Text(
-            text = subtitle,
-            style = MaterialTheme.typography.bodySmall,
-            fontFamily = GoogleSansRounded,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-    }
-}
-
-/**
- * Reusable Connected Card Corner Shape Helper.
- */
-fun itemShapeFor(
-    index: Int,
-    total: Int,
-    outerCorner: Dp = 24.dp,
-    innerCorner: Dp = 6.dp,
-): RoundedCornerShape =
-    when {
-        total <= 1 -> RoundedCornerShape(outerCorner)
-        index == 0 ->
-            RoundedCornerShape(
-                topStart = outerCorner,
-                topEnd = outerCorner,
-                bottomStart = innerCorner,
-                bottomEnd = innerCorner,
-            )
-        index == total - 1 ->
-            RoundedCornerShape(
-                topStart = innerCorner,
-                topEnd = innerCorner,
-                bottomStart = outerCorner,
-                bottomEnd = outerCorner,
-            )
-        else -> RoundedCornerShape(innerCorner)
-    }
-
-/**
- * 4. Reusable List Item Row (Avatar/Icon + Title + Subtitle + Trailing Badge/Action)
- */
-@Composable
-fun LuminaListItem(
-    title: String,
-    subtitle: String? = null,
-    modifier: Modifier = Modifier,
-    shape: androidx.compose.ui.graphics.Shape = RoundedCornerShape(16.dp),
-    containerColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.surfaceContainerHigh,
-    border: androidx.compose.foundation.BorderStroke? = null,
-    titleColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurface,
-    subtitleColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurfaceVariant,
     leadingContent: @Composable (() -> Unit)? = null,
-    trailingBadgeText: String? = null,
     trailingContent: @Composable (() -> Unit)? = null,
+    shape: Shape = RoundedCornerShape(20.dp),
+    containerColor: Color = MaterialTheme.colorScheme.surfaceContainerLow,
     onClick: (() -> Unit)? = null,
 ) {
     Surface(
-        onClick = { onClick?.invoke() },
-        enabled = onClick != null,
         shape = shape,
         color = containerColor,
-        border = border,
+        onClick = onClick ?: {},
+        enabled = onClick != null,
         modifier = modifier.fillMaxWidth(),
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 13.dp),
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 14.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(14.dp),
         ) {
             leadingContent?.invoke()
-
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(2.dp),
-            ) {
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = title,
                     style = MaterialTheme.typography.titleMedium,
                     fontFamily = GoogleSansRounded,
-                    fontWeight = FontWeight.Bold,
-                    color = titleColor,
-                    maxLines = 1,
-                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
-                if (!subtitle.isNullOrBlank()) {
+                if (subtitle.isNotBlank()) {
                     Text(
                         text = subtitle,
                         style = MaterialTheme.typography.bodySmall,
                         fontFamily = GoogleSansRounded,
-                        color = subtitleColor,
-                        maxLines = 1,
-                        overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
             }
-
-            if (trailingContent != null) {
-                trailingContent()
-            } else if (!trailingBadgeText.isNullOrBlank()) {
-                Surface(
-                    shape = androidx.compose.foundation.shape.CircleShape,
-                    color = MaterialTheme.colorScheme.secondaryContainer,
-                ) {
-                    Text(
-                        text = trailingBadgeText,
-                        style = MaterialTheme.typography.labelSmall,
-                        fontFamily = GoogleSansRounded,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSecondaryContainer,
-                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
-                    )
-                }
-            }
+            trailingContent?.invoke()
         }
     }
 }
-

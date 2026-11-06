@@ -1,6 +1,5 @@
-package com.gdgoc.luminawalls.ui.components
+package com.gdgocwidyatama.sukiwalls.ui.components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -24,15 +22,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.gdgoc.luminawalls.theme.GoogleSansRounded
+import com.gdgocwidyatama.sukiwalls.theme.GoogleSansRounded
 
-/**
- * Komponen kartu seleksi interaktif dengan ikon, judul, dan status aktif.
- */
 @Composable
 fun RichSelectionCard(
     title: String,
@@ -40,22 +34,17 @@ fun RichSelectionCard(
     description: String,
     icon: ImageVector,
     selected: Boolean,
-    badgeText: String? = null,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val cardBg =
-        if (selected) MaterialTheme.colorScheme.secondaryContainer
-        else MaterialTheme.colorScheme.surfaceContainerHigh
-    val onCardBg =
-        if (selected) MaterialTheme.colorScheme.onSecondaryContainer
-        else MaterialTheme.colorScheme.onSurface
-    val iconContainerColor =
-        if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.18f)
-        else MaterialTheme.colorScheme.surfaceContainerHighest
-    val iconTint =
-        if (selected) MaterialTheme.colorScheme.primary
-        else MaterialTheme.colorScheme.onSurfaceVariant
+    val cardBg = if (selected) MaterialTheme.colorScheme.secondaryContainer
+    else MaterialTheme.colorScheme.surfaceContainerHigh
+    val onCardBg = if (selected) MaterialTheme.colorScheme.onSecondaryContainer
+    else MaterialTheme.colorScheme.onSurface
+    val iconContainerColor = if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.18f)
+    else MaterialTheme.colorScheme.surfaceContainerHighest
+    val iconTint = if (selected) MaterialTheme.colorScheme.primary
+    else MaterialTheme.colorScheme.onSurfaceVariant
 
     Surface(
         onClick = onClick,
@@ -72,11 +61,10 @@ fun RichSelectionCard(
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Box(
-                    modifier =
-                        Modifier
-                            .size(44.dp)
-                            .clip(CircleShape)
-                            .background(iconContainerColor),
+                    modifier = Modifier
+                        .size(44.dp)
+                        .clip(CircleShape)
+                        .background(iconContainerColor),
                     contentAlignment = Alignment.Center,
                 ) {
                     Icon(
@@ -90,34 +78,15 @@ fun RichSelectionCard(
                 Spacer(Modifier.width(14.dp))
 
                 Column(modifier = Modifier.weight(1f)) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    ) {
-                        Text(
-                            text = title,
-                            style = MaterialTheme.typography.titleMedium,
-                            fontFamily = GoogleSansRounded,
-                            fontWeight = FontWeight.Bold,
-                            color = onCardBg,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                        )
-                        if (!badgeText.isNullOrBlank()) {
-                            Text(
-                                text = badgeText,
-                                style = MaterialTheme.typography.labelSmall,
-                                fontFamily = GoogleSansRounded,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onPrimary,
-                                modifier =
-                                    Modifier
-                                        .clip(RoundedCornerShape(8.dp))
-                                        .background(MaterialTheme.colorScheme.primary)
-                                        .padding(horizontal = 6.dp, vertical = 2.dp),
-                            )
-                        }
-                    }
+                    Text(
+                        text = title,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontFamily = GoogleSansRounded,
+                        fontWeight = FontWeight.Bold,
+                        color = onCardBg,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
                     Text(
                         text = subtitle,
                         style = MaterialTheme.typography.bodySmall,
