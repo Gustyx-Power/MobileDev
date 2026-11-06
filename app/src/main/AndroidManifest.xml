@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- TODO: [Session 5] Capstone Showcase — Permissions untuk akses API & pasang wallpaper -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
 
@@ -11,8 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LuminaWalls">
-        <!-- TODO: [Session 1] Setelah mengaktifkan Theme.App.Starting di themes.xml, ganti android:theme di atas menjadi @style/Theme.App.Starting -->
+        android:theme="@style/Theme.App.Starting">
         <activity
             android:name=".MainActivity"
             android:exported="true">
