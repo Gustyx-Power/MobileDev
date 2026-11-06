@@ -1,4 +1,4 @@
-package com.gdgoc.luminawalls.ui.screens.preview
+package com.gdgocwidyatama.sukiwalls.ui.screens.preview.components
 
 import android.app.WallpaperManager
 import androidx.compose.foundation.layout.Arrangement
@@ -22,15 +22,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.gdgoc.luminawalls.theme.GoogleSansRounded
-import com.gdgoc.luminawalls.ui.components.RichSelectionCard
+import com.gdgocwidyatama.sukiwalls.R
+import com.gdgocwidyatama.sukiwalls.theme.GoogleSansRounded
+import com.gdgocwidyatama.sukiwalls.ui.components.RichSelectionCard
 
-/**
- * BottomSheet untuk memilih target pasang wallpaper (Home, Lock, atau Keduanya).
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ApplyWallpaperBottomSheet(
@@ -54,7 +53,7 @@ fun ApplyWallpaperBottomSheet(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = androidx.compose.ui.res.stringResource(com.gdgoc.luminawalls.R.string.apply_sheet_title),
+                text = stringResource(R.string.apply_sheet_title),
                 style = MaterialTheme.typography.titleLarge,
                 fontFamily = GoogleSansRounded,
                 fontWeight = FontWeight.Bold,
@@ -62,7 +61,7 @@ fun ApplyWallpaperBottomSheet(
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = androidx.compose.ui.res.stringResource(com.gdgoc.luminawalls.R.string.apply_sheet_subtitle),
+                text = stringResource(R.string.apply_sheet_subtitle),
                 style = MaterialTheme.typography.bodyMedium,
                 fontFamily = GoogleSansRounded,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -76,39 +75,36 @@ fun ApplyWallpaperBottomSheet(
                 verticalArrangement = Arrangement.spacedBy(14.dp),
                 contentPadding = PaddingValues(bottom = 36.dp),
             ) {
-                // 1. Home & Lock Screen
                 item {
                     val flag = WallpaperManager.FLAG_LOCK or WallpaperManager.FLAG_SYSTEM
                     RichSelectionCard(
-                        title = androidx.compose.ui.res.stringResource(com.gdgoc.luminawalls.R.string.apply_both_title),
-                        subtitle = androidx.compose.ui.res.stringResource(com.gdgoc.luminawalls.R.string.apply_both_subtitle),
-                        description = androidx.compose.ui.res.stringResource(com.gdgoc.luminawalls.R.string.apply_both_desc),
+                        title = stringResource(R.string.apply_both_title),
+                        subtitle = stringResource(R.string.apply_both_subtitle),
+                        description = stringResource(R.string.apply_both_desc),
                         icon = Icons.Rounded.CheckCircle,
                         selected = selectedTargetFlag == flag,
                         onClick = { onSelectTarget(flag) },
                     )
                 }
 
-                // 2. Lock Screen
                 item {
                     val flag = WallpaperManager.FLAG_LOCK
                     RichSelectionCard(
-                        title = androidx.compose.ui.res.stringResource(com.gdgoc.luminawalls.R.string.apply_lock_title),
-                        subtitle = androidx.compose.ui.res.stringResource(com.gdgoc.luminawalls.R.string.apply_lock_subtitle),
-                        description = androidx.compose.ui.res.stringResource(com.gdgoc.luminawalls.R.string.apply_lock_desc),
+                        title = stringResource(R.string.apply_lock_title),
+                        subtitle = stringResource(R.string.apply_lock_subtitle),
+                        description = stringResource(R.string.apply_lock_desc),
                         icon = Icons.Rounded.Lock,
                         selected = selectedTargetFlag == flag,
                         onClick = { onSelectTarget(flag) },
                     )
                 }
 
-                // 3. Home Screen
                 item {
                     val flag = WallpaperManager.FLAG_SYSTEM
                     RichSelectionCard(
-                        title = androidx.compose.ui.res.stringResource(com.gdgoc.luminawalls.R.string.apply_home_title),
-                        subtitle = androidx.compose.ui.res.stringResource(com.gdgoc.luminawalls.R.string.apply_home_subtitle),
-                        description = androidx.compose.ui.res.stringResource(com.gdgoc.luminawalls.R.string.apply_home_desc),
+                        title = stringResource(R.string.apply_home_title),
+                        subtitle = stringResource(R.string.apply_home_subtitle),
+                        description = stringResource(R.string.apply_home_desc),
                         icon = Icons.Rounded.Home,
                         selected = selectedTargetFlag == flag,
                         onClick = { onSelectTarget(flag) },
