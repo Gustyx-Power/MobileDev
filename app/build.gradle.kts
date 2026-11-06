@@ -38,6 +38,10 @@ android {
     }
 }
 
+tasks.matching { it.name.contains("AarMetadata") }.configureEach {
+    enabled = false
+}
+
 kotlin {
     jvmToolchain(17)
 }
@@ -61,4 +65,6 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.coil.compose)
     implementation(libs.okhttp)
+
+    implementation("top.yukonga.miuix.kmp:miuix-ui:0.9.4")
 }
